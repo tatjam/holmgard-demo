@@ -1,6 +1,5 @@
 {
-  "name": "OSPGL definitions",
-  "words": ["machine", "vehicle"],
+  "name": "Holmgard definitions",
   "files": ["package.lua"],
   "settings": {
     "Lua.runtime.version": "LuaJIT",
