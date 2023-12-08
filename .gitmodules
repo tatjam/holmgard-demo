@@ -1,0 +1,3 @@
+[submodule "holmgard"]
+	path = holmgard
+	url = https://github.com/tatjam/holmgard
