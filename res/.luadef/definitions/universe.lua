@@ -5,7 +5,7 @@
 ---@class universe
 ---@field bt_world bullet.world
 ---@field system universe.planetary_system
----@field entities universe.entity[] Read only
+---@field objects universe.object[] Read only
 ---@field save_db universe.save_database
 local universe = {}
 
@@ -20,15 +20,15 @@ function universe:sign_up_for_event(event_id, fun) end
 function universe:emit_event(event_id, ...) end
 
 ---@param script_path string path to the script
----@return universe.entity
---- Passes extra arguments directly to the new entity
-function universe:create_entity(script_path, ...) end
+---@return universe.object
+--- Passes extra arguments directly to the new object
+function universe:create_object(script_path, ...) end
 
 ---@param id integer
----@return universe.entity
---- If you hold the returned pointer, make sure you sign up for the entity removal event in case
---- the entity gets removed, so you can invalidate the pointer safely
-function universe:get_entity(id) end
+---@return universe.object
+--- If you hold the returned pointer, make sure you sign up for the object removal event in case
+--- the object gets removed, so you can invalidate the pointer safely
+function universe:get_object(id) end
 
 ---@param dt number
 function universe:update(dt) end
@@ -70,34 +70,32 @@ local element = {}
 local element_config = {}
 
 
----@class universe.entity
+---@class universe.object
 --- Entities are implemented in lua and work as tables!
 --- (ie, you can access all public stuff in their environment)
 --- but some functions and variables are also exposed, written in C++
 ---@field uid integer
 ---@field drawable_uid integer
 ---@field init_toml toml.table
----@field lua table Direct access to the entity lua environment, contents depend on entity!
-local entity = {}
+---@field lua table Direct access to the univere object lua environment, contents depend on object!
+local object = {}
 
 ---@return glm.vec3
 ---@param physics boolean Obtain physical position instead of graphical position. Only valid during real-time
-function entity:get_position(physics) end
+function object:get_position(physics) end
 
 ---@return glm.vec3
 ---@param physics boolean Obtain physical velocity instead of graphical velocity. Only valid during real-time
-function entity:get_velocity(physics) end
+function object:get_velocity(physics) end
 
 ---@return glm.quat
 ---@param physics boolean Obtain physical orientation instead of graphical orientation. Only valid during real-time
-function entity:get_orientation(physics) end
+function object:get_orientation(physics) end
 
 ---@return glm.vec3
 ---@param physics boolean Obtain physical velocity instead of graphical velocity. Only valid during real-time
-function entity:get_angular_velocity(physics) end
+function object:get_angular_velocity(physics) end
 
----@return flight_input.context|nil
-function entity:get_input_ctx() end
 
 
 ---@class universe.save_database
