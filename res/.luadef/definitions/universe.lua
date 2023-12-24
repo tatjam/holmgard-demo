@@ -55,6 +55,10 @@ function planetary_system:get_element_velocity(name) end
 --- outdated in the case of element creation / deletion
 function planetary_system:get_element(name) end
 
+---@param toml toml.table
+--- Make sure to use the push_pkg and restore_pkg functions!
+function planetary_system:load(toml) end
+
 
 ---@class universe.element
 ---@field index integer
